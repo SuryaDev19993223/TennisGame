@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
 
 //color scheme consisting of a floor, background and court color
 [System.Serializable]
@@ -12,7 +13,7 @@ public class ColorScheme{
 	public Color court;
 }
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviourPunCallbacks {
     
 	public string winScene = "Dance scene";
 	public bool playerServeOnly;

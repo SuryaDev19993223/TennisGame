@@ -15,6 +15,7 @@ public class VisitorSpawner : MonoBehaviour {
 	public int visitorChanceMin;
 	public int visitorChanceMax;
 	public float kidOffset;
+	public bool spawnZ;
 	
 	//materials to randomly choose from
 	public Material[] pants;
@@ -44,12 +45,20 @@ public class VisitorSpawner : MonoBehaviour {
 			//spawn visitors
 			for(int j = 0; j < visitorCount; j++){
 				if(Random.Range(0, visitorChance) != 0){
-					//completely randomize all visitor settings
+
 					bool kid = Random.Range(0, 2) == 0;
 					
 					Vector3 pos = kid ? startPos + Vector3.up * kidOffset : startPos;
-					pos.x -= j * space;
-					pos.x += Random.Range(-randomPos, randomPos);
+					if (spawnZ)
+					{
+                        pos.z -= j * space;
+                        pos.z += Random.Range(-randomPos, randomPos);
+                    }
+					else
+					{
+                        pos.x -= j * space;
+                        pos.x += Random.Range(-randomPos, randomPos);
+                    }
 					GameObject newVisitor = Instantiate(visitor, pos, Quaternion.Euler(rotation));
 					
 					Visitor vis = newVisitor.GetComponent<Visitor>();
